@@ -3,8 +3,6 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export default async function Home() {
-  const data = await trpc.hello({ text: "CharleSs" });
-
   return (
     <HydrateClient>
       <Suspense fallback={<p>Loading....</p>}>
