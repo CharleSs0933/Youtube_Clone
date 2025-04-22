@@ -1,4 +1,4 @@
-import { HydrateClient, trpc } from "@/trpc/server";
+import { HydrateClient } from "@/trpc/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
