@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 interface VideoThumbnailProps {
-  imageUrl?: string;
+  imageUrl?: string | null;
 }
 
 const VideoThumbnail = ({ imageUrl }: VideoThumbnailProps) => {
