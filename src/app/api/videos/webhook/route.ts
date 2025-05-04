@@ -117,6 +117,30 @@ export const POST = async (request: Request) => {
 
       break;
     }
+    case "video.asset.track.ready": {
+      const data = payload.data as VideoAssetTrackReadyWebhookEvent["data"] & {
+        asset_id: string;
+      };
+
+      // Typescript incorrectly infers that data.asset_id is not present in the payload
+      const assetId = data.asset_id;
+      const trackId = data.id;
+      const status = data.status;
+
+      if (!assetId) {
+        return new Response("No asset id provided", { status: 400 });
+      }
+
+      await db
+        .update(videos)
+        .set({
+          muxTrackId: trackId,
+          muxTrackStatus: status,
+        })
+        .where(eq(videos.muxAccessId, assetId));
+
+      break;
+    }
   }
 
   return new Response("Webhook received", { status: 200 });
